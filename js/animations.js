@@ -4,8 +4,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { textureDataURL } from "./textures.js?v=2";
-import { isTouch } from "./cursor.js?v=2";
+import { textureDataURL } from "./textures.js?v=3";
+import { isTouch } from "./cursor.js?v=3";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -228,7 +228,15 @@ function voices() {
     // Duplicate the cards once so the loop is seamless
     col.insertAdjacentHTML("beforeend", col.innerHTML);
     col.querySelectorAll(".quote").forEach((q, n) => n >= col.children.length / 2 && q.setAttribute("aria-hidden", "true"));
-    col.dataset.speed = String(26 + i * 7); // px per second — each column drifts at its own pace
+    col.dataset.speed = String(58 + i * 12); // px per second — each column drifts at its own pace
+  });
+
+  // Entrance: cards rise in with a stagger the first time the section arrives
+  gsap.set(wrap.querySelectorAll(".quote"), { opacity: 0, y: 60, scale: 0.96 });
+  ScrollTrigger.create({
+    trigger: wrap, start: "top 80%", once: true,
+    onEnter: () => cols.forEach((col, i) =>
+      gsap.to(col.querySelectorAll(".quote"), { opacity: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.08, delay: i * 0.12, ease: "expo.out", clearProps: "scale" }))
   });
 
   const build = () => {
@@ -270,10 +278,10 @@ function voices() {
     }
   });
 
-  // Ease to a crawl while a column is hovered so quotes can be read
+  // Slow (but keep moving) while a column is hovered so quotes can be read
   if (!isTouch) {
     cols.forEach((col, i) => {
-      col.addEventListener("mouseenter", () => { tweens[i]._hover = true; gsap.to(tweens[i], { timeScale: 0.12, duration: 0.7, overwrite: true }); });
+      col.addEventListener("mouseenter", () => { tweens[i]._hover = true; gsap.to(tweens[i], { timeScale: 0.4, duration: 0.7, overwrite: true }); });
       col.addEventListener("mouseleave", () => { tweens[i]._hover = false; gsap.to(tweens[i], { timeScale: 1, duration: 0.9, overwrite: true }); });
     });
   }
