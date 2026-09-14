@@ -4,8 +4,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { textureDataURL } from "./textures.js";
-import { isTouch } from "./cursor.js";
+import { textureDataURL } from "./textures.js?v=2";
+import { isTouch } from "./cursor.js?v=2";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 

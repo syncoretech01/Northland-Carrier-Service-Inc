@@ -6,14 +6,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
-import { initTextures } from "./textures.js";
-import { initCursor, initMagnetic, initTilt } from "./cursor.js";
-import { initNav } from "./nav.js";
-import { runPreloader } from "./preloader.js";
-import { initHero } from "./hero3d.js";
-import { initTruck } from "./truck3d.js";
-import { initFleetSlider } from "./slider3d.js";
-import { initAnimations, heroEntrance, heroScroll, exploded } from "./animations.js";
+import { initTextures } from "./textures.js?v=2";
+import { initCursor, initMagnetic, initTilt } from "./cursor.js?v=2";
+import { initNav } from "./nav.js?v=2";
+import { runPreloader } from "./preloader.js?v=2";
+import { initHero } from "./hero3d.js?v=2";
+import { initTruck } from "./truck3d.js?v=2";
+import { initFleetSlider } from "./slider3d.js?v=2";
+import { initAnimations, heroEntrance, heroScroll, exploded } from "./animations.js?v=2";
 
 gsap.registerPlugin(ScrollTrigger);
 
