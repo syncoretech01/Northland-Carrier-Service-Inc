@@ -1,0 +1,11 @@
+{
+  "name": "northland-carrier-service",
+  "version": "1.0.0",
+  "description": "Northland Carrier Service Inc. — construction materials hauling website",
+  "type": "module",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js"
+  },
+  "private": true
+}

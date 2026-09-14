@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Northland Carrier Service Inc. — Construction Materials Hauling, Jamestown NY</title>
+  <meta name="description" content="Northland Carrier Service Inc. is a professional construction materials hauling company specializing in the safe, reliable transportation of concrete, asphalt, sand, gravel, crushed stone, fill dirt, topsoil and construction debris for commercial, municipal and residential projects." />
+  <meta name="theme-color" content="#F5F2EB" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/index.js",
+      "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/ScrollTrigger.js",
+      "gsap/SplitText": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/SplitText.js",
+      "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.mjs",
+      "motion": "https://cdn.jsdelivr.net/npm/motion@11.15.0/+esm"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ PRELOADER ═══════════════════════════════ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__cols">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="preloader__inner">
+      <div class="preloader__mark">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="pl-path" d="M18 78 L18 46 L52 46 L52 30 L78 30 L92 46 L102 46 L102 78 Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <path class="pl-path" d="M52 46 L78 46 L78 30" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <circle class="pl-path" cx="34" cy="82" r="8" stroke="currentColor" stroke-width="3"/>
+          <circle class="pl-path" cx="86" cy="82" r="8" stroke="currentColor" stroke-width="3"/>
+          <path class="pl-path" d="M18 62 L44 62" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="preloader__text">
+        <span class="preloader__label mono">Northland Carrier Service Inc.</span>
+        <span class="preloader__status mono" id="preloaderStatus">Loading the fleet</span>
+      </div>
+      <div class="preloader__counter" id="preloaderCounter"><span>0</span></div>
+      <div class="preloader__bar"><i id="preloaderBar"></i></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ CURSOR ═══════════════════════════════ -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"><span class="cursor__label"></span></div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"><i></i></div>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__brand" data-cursor="-sm" aria-label="Northland Carrier Service home">
+        <span class="nav__mark">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 78 L18 46 L52 46 L52 30 L78 30 L92 46 L102 46 L102 78 Z" fill="currentColor"/>
+            <circle cx="34" cy="84" r="9" fill="currentColor"/>
+            <circle cx="86" cy="84" r="9" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="nav__name">
+          <b>Northland</b>
+          <small>Carrier Service Inc.</small>
+        </span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#services" class="nav__link" data-cursor="-sm"><span data-text="Services">Services</span></a>
+        <a href="#materials" class="nav__link" data-cursor="-sm"><span data-text="Materials">Materials</span></a>
+        <a href="#fleet" class="nav__link" data-cursor="-sm"><span data-text="Fleet">Fleet</span></a>
+        <a href="#process" class="nav__link" data-cursor="-sm"><span data-text="Process">Process</span></a>
+        <a href="#sectors" class="nav__link" data-cursor="-sm"><span data-text="Sectors">Sectors</span></a>
+      </nav>
+
+      <div class="nav__actions">
+        <a href="tel:7179909390" class="nav__phone mono" data-cursor="-sm">717-990-9390</a>
+        <a href="#contact" class="btn btn--ink btn--sm magnetic" data-cursor="-sm"><span>Request a Quote</span><i></i></a>
+        <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" data-cursor="-sm">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ MOBILE MENU ═══════════════════════════════ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bg"><span></span><span></span><span></span></div>
+    <div class="menu__inner">
+      <nav class="menu__links">
+        <a href="#services" class="menu__link"><em>01</em><span>Services</span></a>
+        <a href="#materials" class="menu__link"><em>02</em><span>Materials</span></a>
+        <a href="#fleet" class="menu__link"><em>03</em><span>Fleet</span></a>
+        <a href="#process" class="menu__link"><em>04</em><span>Process</span></a>
+        <a href="#sectors" class="menu__link"><em>05</em><span>Sectors</span></a>
+        <a href="#contact" class="menu__link"><em>06</em><span>Contact</span></a>
+      </nav>
+      <div class="menu__meta">
+        <div>
+          <span class="eyebrow">Dispatch</span>
+          <a href="tel:7179909390" class="menu__big">717-990-9390</a>
+        </div>
+        <div>
+          <span class="eyebrow">Office</span>
+          <p>25 Woodland Ave, Suite 15<br/>Jamestown, NY 14701</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+    <section class="hero" id="hero">
+      <canvas class="hero__canvas" id="heroCanvas"></canvas>
+      <div class="hero__grain"></div>
+      <div class="hero__inner">
+        <div class="hero__top">
+          <span class="hero__eyebrow mono"><i class="pulse"></i> Jamestown, NY · Western New York &amp; beyond</span>
+          <span class="hero__eyebrow mono hero__eyebrow--right">Est. Construction Materials Hauling</span>
+        </div>
+
+        <h1 class="hero__title" id="heroTitle">
+          <span class="hero__line"><span class="hero__word">We</span> <span class="hero__word">move</span> <span class="hero__word">the</span></span>
+          <span class="hero__line"><span class="hero__word serif">ground</span> <span class="hero__word">beneath</span></span>
+          <span class="hero__line"><span class="hero__word">every</span> <span class="hero__word">build.</span></span>
+        </h1>
+
+        <div class="hero__bottom">
+          <p class="hero__lede" id="heroLede">
+            Northland Carrier Service Inc. is a professional construction materials hauling company — the safe, reliable transportation of bulk materials for commercial, municipal and residential projects.
+          </p>
+          <div class="hero__cta" id="heroCta">
+            <a href="#contact" class="btn btn--amber magnetic" data-cursor="-sm"><span>Request a Quote</span><i></i></a>
+            <a href="#materials" class="btn btn--ghost magnetic" data-cursor="-sm"><span>Explore Materials</span><i></i></a>
+          </div>
+        </div>
+
+        <div class="hero__chips" id="heroChips">
+          <div class="chip"><b>24/7</b><span>Dispatch</span></div>
+          <div class="chip"><b>98.6%</b><span>On-time delivery</span></div>
+          <div class="chip"><b>9</b><span>Material classes</span></div>
+        </div>
+
+        <div class="hero__scroll" id="heroScroll">
+          <span class="mono">Scroll</span>
+          <i></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ MARQUEE ═══════════════════════════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Ready-Mix Concrete</span><i>◆</i><span>Precast Components</span><i>◆</i><span>Hot Mix Asphalt</span><i>◆</i><span>Cold Patch</span><i>◆</i><span>Millings</span><i>◆</i><span>Sand</span><i>◆</i><span>Gravel</span><i>◆</i><span>Crushed Stone</span><i>◆</i><span>Fill Dirt</span><i>◆</i><span>Topsoil</span><i>◆</i><span>Construction Debris</span><i>◆</i>
+        <span>Ready-Mix Concrete</span><i>◆</i><span>Precast Components</span><i>◆</i><span>Hot Mix Asphalt</span><i>◆</i><span>Cold Patch</span><i>◆</i><span>Millings</span><i>◆</i><span>Sand</span><i>◆</i><span>Gravel</span><i>◆</i><span>Crushed Stone</span><i>◆</i><span>Fill Dirt</span><i>◆</i><span>Topsoil</span><i>◆</i><span>Construction Debris</span><i>◆</i>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════ MANIFESTO (parallax storytelling) ═══════════════════════════════ -->
+    <section class="manifesto" id="about">
+      <div class="container">
+        <div class="manifesto__grid">
+          <div class="manifesto__aside">
+            <span class="eyebrow reveal">Who we are</span>
+            <div class="manifesto__stack">
+              <figure class="manifesto__img parallax-img" data-speed="0.15">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80" alt="Construction crew on an active job site" data-fallback="gravel" loading="lazy" />
+              </figure>
+              <figure class="manifesto__img manifesto__img--2 parallax-img" data-speed="-0.12">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80" alt="Construction crane against the sky" data-fallback="asphalt" loading="lazy" />
+              </figure>
+            </div>
+          </div>
+          <div class="manifesto__body">
+            <p class="manifesto__text words" id="manifestoText">
+              Northland Carrier Service Inc. specializes in the safe and reliable transportation of bulk materials. From ready-mix and precast concrete to hot-mix asphalt, sand, gravel, crushed stone, fill dirt, topsoil and construction debris — if it builds the site, we haul it. We are Other Specialty Trade Contractors who treat every load like it's the one holding up your schedule.
+            </p>
+            <div class="manifesto__facts">
+              <div class="fact reveal">
+                <span class="fact__num" data-count="250" data-suffix="K+">0</span>
+                <span class="fact__label">Tons hauled per year</span>
+              </div>
+              <div class="fact reveal">
+                <span class="fact__num" data-count="18" data-suffix="">0</span>
+                <span class="fact__label">Trucks &amp; trailers in service</span>
+              </div>
+              <div class="fact reveal">
+                <span class="fact__num" data-count="600" data-suffix="+">0</span>
+                <span class="fact__label">Projects supplied</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ SERVICES (3D hover cards) ═══════════════════════════════ -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow reveal">What we do</span>
+          <h2 class="h2 split-lines">Hauling built around <em class="serif">your</em> schedule, not ours.</h2>
+          <p class="section-head__p reveal">Six core services. One dispatch line. Every truck tracked, every ticket documented, every load delivered where and when the site needs it.</p>
+        </div>
+
+        <div class="services__grid">
+          <article class="tilt service-card" data-cursor="-view">
+            <div class="tilt__inner">
+              <div class="service-card__glare"></div>
+              <span class="service-card__num mono">01</span>
+              <div class="service-card__icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 32V20h18v-6h10l8 8v10H6z"/><circle cx="14" cy="34" r="4"/><circle cx="34" cy="34" r="4"/><path d="M24 20h10"/></svg>
+              </div>
+              <h3>Bulk Material Hauling</h3>
+              <p>Tri-axle and quad dumps for sand, gravel, crushed stone and fill — high volume, tight turnarounds, consistent tonnage.</p>
+              <ul class="service-card__tags"><li>Aggregates</li><li>Fill</li><li>Stone</li></ul>
+              <span class="service-card__link">Learn more <i>→</i></span>
+            </div>
+          </article>
+
+          <article class="tilt service-card" data-cursor="-view">
+            <div class="tilt__inner">
+              <div class="service-card__glare"></div>
+              <span class="service-card__num mono">02</span>
+              <div class="service-card__icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 34l6-20h20l6 20z"/><path d="M14 14l4-6h12l4 6"/><path d="M12 24h24"/></svg>
+              </div>
+              <h3>Concrete &amp; Precast Transport</h3>
+              <p>Ready-mix coordination and precast component delivery timed to the pour — barriers, panels, culverts and structural units.</p>
+              <ul class="service-card__tags"><li>Ready-Mix</li><li>Precast</li></ul>
+              <span class="service-card__link">Learn more <i>→</i></span>
+            </div>
+          </article>
+
+          <article class="tilt service-card" data-cursor="-view">
+            <div class="tilt__inner">
+              <div class="service-card__glare"></div>
+              <span class="service-card__num mono">03</span>
+              <div class="service-card__icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 36c8 0 8-8 16-8s8 8 16 8 8-8 8-8"/><path d="M6 20h36"/><path d="M10 12h28"/></svg>
+              </div>
+              <h3>Asphalt Delivery</h3>
+              <p>Insulated, tarped hot-mix hauling that hits the mat at temperature. Cold patch and millings moved on demand.</p>
+              <ul class="service-card__tags"><li>Hot Mix</li><li>Cold Patch</li><li>Millings</li></ul>
+              <span class="service-card__link">Learn more <i>→</i></span>
+            </div>
+          </article>
+
+          <article class="tilt service-card" data-cursor="-view">
+            <div class="tilt__inner">
+              <div class="service-card__glare"></div>
+              <span class="service-card__num mono">04</span>
+              <div class="service-card__icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 38h32"/><path d="M12 38V22l12-10 12 10v16"/><path d="M20 38V28h8v10"/></svg>
+              </div>
+              <h3>Site Prep &amp; Landscape Fill</h3>
+              <p>Topsoil, screened fill and structural fill for grading, pads, berms and finished landscape — delivered and spread-ready.</p>
+              <ul class="service-card__tags"><li>Topsoil</li><li>Fill Dirt</li></ul>
+              <span class="service-card__link">Learn more <i>→</i></span>
+            </div>
+          </article>
+
+          <article class="tilt service-card" data-cursor="-view">
+            <div class="tilt__inner">
+              <div class="service-card__glare"></div>
+              <span class="service-card__num mono">05</span>
+              <div class="service-card__icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 20h32v18H8z"/><path d="M8 20l6-10h20l6 10"/><path d="M16 28h16"/></svg>
+              </div>
+              <h3>Debris &amp; Haul-Off</h3>
+              <p>Demolition debris, excavation spoils and clean-up removal with documented disposal and recycling wherever possible.</p>
+              <ul class="service-card__tags"><li>Debris</li><li>Spoils</li><li>Recycling</li></ul>
+              <span class="service-card__link">Learn more <i>→</i></span>
+            </div>
+          </article>
+
+          <article class="tilt service-card service-card--dark" data-cursor="-view">
+            <div class="tilt__inner">
+              <div class="service-card__glare"></div>
+              <span class="service-card__num mono">06</span>
+              <div class="service-card__icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="24" r="16"/><path d="M24 12v12l8 6"/></svg>
+              </div>
+              <h3>Municipal &amp; Contract Hauling</h3>
+              <p>Season-long agreements for municipalities and GCs — DOT-compliant fleet, certified drivers and ticketing you can audit.</p>
+              <ul class="service-card__tags"><li>Municipal</li><li>Term Contracts</li></ul>
+              <span class="service-card__link">Learn more <i>→</i></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ MATERIALS (horizontal parallax scroll) ═══════════════════════════════ -->
+    <section class="materials" id="materials">
+      <div class="materials__pin">
+        <div class="materials__head container">
+          <div>
+            <span class="eyebrow">Materials we haul</span>
+            <h2 class="h2">Nine classes.<br/><em class="serif">Any</em> tonnage.</h2>
+          </div>
+          <div class="materials__progress"><i id="materialsProgress"></i></div>
+        </div>
+        <div class="materials__track" id="materialsTrack">
+          <div class="mat-panel mat-panel--intro">
+            <p class="mat-panel__intro">Every material has its own weight, moisture, and handling profile. Our dispatch matches the right body, tarp and route to each one.</p>
+            <span class="mat-panel__drag mono">Scroll to explore →</span>
+          </div>
+
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="concrete"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">01 / Concrete</span>
+              <h3>Ready-Mix &amp; Precast</h3>
+              <p>Pour-timed ready-mix coordination and precast structural components.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="asphalt"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">02 / Asphalt</span>
+              <h3>Hot Mix, Cold Patch, Millings</h3>
+              <p>Insulated hauling that keeps hot-mix at spec from plant to paver.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="sand"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">03 / Sand</span>
+              <h3>Mason, Concrete &amp; Fill Sand</h3>
+              <p>Washed and screened grades for masonry, bedding and backfill.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="gravel"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">04 / Gravel</span>
+              <h3>Pea, Bank Run &amp; #57</h3>
+              <p>Drainage, driveways and base courses — sized to the spec sheet.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="stone"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">05 / Crushed Stone</span>
+              <h3>Crusher Run, #1 &amp; #2</h3>
+              <p>Compactable base and sub-base stone for roads, pads and foundations.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="dirt"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">06 / Fill Dirt</span>
+              <h3>Structural &amp; Common Fill</h3>
+              <p>Clean fill for grading, berms and elevation changes at volume.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="topsoil"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">07 / Topsoil</span>
+              <h3>Screened &amp; Premium Blend</h3>
+              <p>Landscape-ready soil for finish grading, lawns and planting beds.</p>
+            </div>
+          </article>
+          <article class="mat-panel" data-cursor="-drag">
+            <div class="mat-panel__media"><canvas data-texture="debris"></canvas></div>
+            <div class="mat-panel__body">
+              <span class="mono">08 / Debris</span>
+              <h3>Construction &amp; Demolition</h3>
+              <p>Documented haul-off with recycling and compliant disposal.</p>
+            </div>
+          </article>
+          <article class="mat-panel mat-panel--cta">
+            <h3>Need a material<br/>not listed?</h3>
+            <p>If it can be loaded into a dump body or on a trailer, we'll quote it.</p>
+            <a href="#contact" class="btn btn--amber magnetic" data-cursor="-sm"><span>Ask Dispatch</span><i></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ IMMERSIVE ZOOM ═══════════════════════════════ -->
+    <section class="zoom" id="zoom">
+      <div class="zoom__pin">
+        <div class="zoom__frame" id="zoomFrame">
+          <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1800&q=75" alt="Haul truck on a mountain highway" data-fallback="asphalt" fetchpriority="high" />
+          <div class="zoom__overlay"></div>
+        </div>
+        <div class="zoom__text zoom__text--before" id="zoomBefore">
+          <span class="eyebrow">Built for the road</span>
+          <h2 class="h2">From the pit to the pour,<br/>on <em class="serif">time</em>.</h2>
+        </div>
+        <div class="zoom__text zoom__text--after" id="zoomAfter">
+          <h2 class="display">Every mile,<br/><em class="serif">accounted for.</em></h2>
+          <p>GPS-tracked routes, weigh-station verified tickets and drivers who know the sites they serve.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ FLEET (3D slider) ═══════════════════════════════ -->
+    <section class="fleet" id="fleet">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <span class="eyebrow reveal">The fleet</span>
+            <h2 class="h2 split-lines">Right body for <em class="serif">every</em> load.</h2>
+          </div>
+          <div class="fleet__controls">
+            <button class="ctrl" id="fleetPrev" aria-label="Previous truck" data-cursor="-sm"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <span class="fleet__count mono"><b id="fleetIndex">01</b> / 06</span>
+            <button class="ctrl" id="fleetNext" aria-label="Next truck" data-cursor="-sm"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fleet__stage" id="fleetStage" data-cursor="-drag">
+        <div class="fleet__ring" id="fleetRing">
+          <div class="fleet__card" data-i="0">
+            <div class="fleet__card-media"><canvas data-texture="stone"></canvas></div>
+            <div class="fleet__card-body">
+              <span class="mono">Tri-Axle Dump</span>
+              <h3>22-ton payload</h3>
+              <p>The workhorse for aggregates, fill and asphalt on tight urban sites.</p>
+            </div>
+          </div>
+          <div class="fleet__card" data-i="1">
+            <div class="fleet__card-media"><canvas data-texture="gravel"></canvas></div>
+            <div class="fleet__card-body">
+              <span class="mono">Quad-Axle Dump</span>
+              <h3>26-ton payload</h3>
+              <p>Extra axle, extra tonnage — ideal for long stone and gravel runs.</p>
+            </div>
+          </div>
+          <div class="fleet__card" data-i="2">
+            <div class="fleet__card-media"><canvas data-texture="sand"></canvas></div>
+            <div class="fleet__card-body">
+              <span class="mono">Transfer Trailer</span>
+              <h3>40-ton combined</h3>
+              <p>Tractor + transfer box for high volume sand and base course deliveries.</p>
+            </div>
+          </div>
+          <div class="fleet__card" data-i="3">
+            <div class="fleet__card-media"><canvas data-texture="asphalt"></canvas></div>
+            <div class="fleet__card-body">
+              <span class="mono">Live-Bottom Trailer</span>
+              <h3>Asphalt spec</h3>
+              <p>Conveyor unload keeps hot-mix moving without raising the bed.</p>
+            </div>
+          </div>
+          <div class="fleet__card" data-i="4">
+            <div class="fleet__card-media"><canvas data-texture="concrete"></canvas></div>
+            <div class="fleet__card-body">
+              <span class="mono">Flatbed &amp; Lowboy</span>
+              <h3>Precast &amp; equipment</h3>
+              <p>Secured transport for precast components and heavy site equipment.</p>
+            </div>
+          </div>
+          <div class="fleet__card" data-i="5">
+            <div class="fleet__card-media"><canvas data-texture="debris"></canvas></div>
+            <div class="fleet__card-body">
+              <span class="mono">Roll-Off</span>
+              <h3>20 – 40 yd containers</h3>
+              <p>Debris and demolition haul-off, dropped and swapped on your schedule.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="fleet__hint mono">Drag · Scroll · Arrow keys</p>
+    </section>
+
+    <!-- ═══════════════════════════════ EXPLODED TRUCK (Three.js) ═══════════════════════════════ -->
+    <section class="exploded" id="exploded">
+      <div class="exploded__pin">
+        <canvas class="exploded__canvas" id="truckCanvas"></canvas>
+        <div class="exploded__head container">
+          <span class="eyebrow">Anatomy of a haul</span>
+          <h2 class="h2">What's inside <em class="serif">every</em> truck.</h2>
+        </div>
+        <div class="exploded__labels" id="truckLabels">
+          <div class="tlabel" data-part="cab"><b>Sleeper-less day cab</b><span>Driver visibility &amp; DOT camera system</span></div>
+          <div class="tlabel" data-part="hood"><b>450 hp diesel</b><span>Tier-4 final, telematics reporting</span></div>
+          <div class="tlabel" data-part="bed"><b>Hardox® steel body</b><span>18–22 cu yd, hydraulic lift, auto tarp</span></div>
+          <div class="tlabel" data-part="chassis"><b>Tri-axle chassis</b><span>Air-ride lift axle for legal GVWR</span></div>
+          <div class="tlabel" data-part="wheels"><b>All-position tires</b><span>Inspected daily, chained in winter</span></div>
+          <div class="tlabel" data-part="stack"><b>Vertical exhaust</b><span>Keeps particulate off the load</span></div>
+        </div>
+        <div class="exploded__progress mono"><span>Assembled</span><i id="explodedBar"></i><span>Exploded</span></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ PROCESS (layer transformation / stacking) ═══════════════════════════════ -->
+    <section class="process" id="process">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow reveal">How it works</span>
+          <h2 class="h2 split-lines">Five steps from <em class="serif">call</em> to compaction.</h2>
+        </div>
+      </div>
+      <div class="process__stack" id="processStack">
+        <article class="pcard" style="--i:0">
+          <div class="pcard__inner">
+            <span class="pcard__num">01</span>
+            <div class="pcard__text">
+              <h3>Request</h3>
+              <p>Call dispatch or send the material, tonnage, site and window. We confirm availability within the hour.</p>
+            </div>
+            <div class="pcard__art"><canvas data-texture="sand"></canvas></div>
+          </div>
+        </article>
+        <article class="pcard" style="--i:1">
+          <div class="pcard__inner">
+            <span class="pcard__num">02</span>
+            <div class="pcard__text">
+              <h3>Schedule</h3>
+              <p>Routes are planned around plant hours, site access and weigh stations, with drivers assigned by material class.</p>
+            </div>
+            <div class="pcard__art"><canvas data-texture="gravel"></canvas></div>
+          </div>
+        </article>
+        <article class="pcard" style="--i:2">
+          <div class="pcard__inner">
+            <span class="pcard__num">03</span>
+            <div class="pcard__text">
+              <h3>Load</h3>
+              <p>Every load is ticketed at the scale, tarped and photographed. Hot-mix is temperature-logged at the plant.</p>
+            </div>
+            <div class="pcard__art"><canvas data-texture="asphalt"></canvas></div>
+          </div>
+        </article>
+        <article class="pcard" style="--i:3">
+          <div class="pcard__inner">
+            <span class="pcard__num">04</span>
+            <div class="pcard__text">
+              <h3>Deliver</h3>
+              <p>GPS-tracked trucks arrive in sequence so crews never wait — and never get buried.</p>
+            </div>
+            <div class="pcard__art"><canvas data-texture="stone"></canvas></div>
+          </div>
+        </article>
+        <article class="pcard pcard--dark" style="--i:4">
+          <div class="pcard__inner">
+            <span class="pcard__num">05</span>
+            <div class="pcard__text">
+              <h3>Confirm</h3>
+              <p>Digital tickets, tonnage totals and site sign-offs land in your inbox the same day. Auditable and invoice-ready.</p>
+            </div>
+            <div class="pcard__art"><canvas data-texture="concrete"></canvas></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ STATS BAND ═══════════════════════════════ -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stat reveal"><span class="stat__num"><span data-count="98.6" data-decimals="1" data-suffix="%">0</span></span><span class="stat__label">On-time delivery rate</span></div>
+          <div class="stat reveal"><span class="stat__num"><span data-count="24" data-suffix="/7">0</span></span><span class="stat__label">Dispatch availability</span></div>
+          <div class="stat reveal"><span class="stat__num"><span data-count="0" data-suffix="">0</span></span><span class="stat__label">Reportable incidents, 3 years</span></div>
+          <div class="stat reveal"><span class="stat__num"><span data-count="120" data-suffix="mi">0</span></span><span class="stat__label">Service radius from Jamestown</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ SECTORS (hover reveal) ═══════════════════════════════ -->
+    <section class="sectors" id="sectors">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow reveal">Who we serve</span>
+          <h2 class="h2 split-lines">Four sectors, <em class="serif">one</em> standard.</h2>
+        </div>
+        <ul class="sectors__list" id="sectorsList">
+          <li class="sector" data-img="https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?auto=format&fit=crop&w=900&q=80" data-fallback="concrete" data-cursor="-view">
+            <span class="sector__num mono">01</span>
+            <h3>Commercial</h3>
+            <p>Retail pads, warehouses, mixed-use — phased deliveries for GCs and site contractors.</p>
+            <span class="sector__arrow">↗</span>
+          </li>
+          <li class="sector" data-img="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=900&q=80" data-fallback="asphalt" data-cursor="-view">
+            <span class="sector__num mono">02</span>
+            <h3>Municipal</h3>
+            <p>Road programs, utility work and DPW contracts with full compliance documentation.</p>
+            <span class="sector__arrow">↗</span>
+          </li>
+          <li class="sector" data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" data-fallback="topsoil" data-cursor="-view">
+            <span class="sector__num mono">03</span>
+            <h3>Residential</h3>
+            <p>Driveways, foundations, landscape fill and topsoil for builders and homeowners.</p>
+            <span class="sector__arrow">↗</span>
+          </li>
+          <li class="sector" data-img="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80" data-fallback="stone" data-cursor="-view">
+            <span class="sector__num mono">04</span>
+            <h3>Specialty Trade Contractors</h3>
+            <p>Excavators, pavers, masons and concrete crews who need material on a precise clock.</p>
+            <span class="sector__arrow">↗</span>
+          </li>
+        </ul>
+        <div class="sectors__float" id="sectorsFloat"><img alt="" /></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ TESTIMONIALS (vertical columns slider) ═══════════════════════════════ -->
+    <section class="voices" id="voices">
+      <div class="voices__head container">
+        <span class="eyebrow reveal">From the field</span>
+        <h2 class="h2 split-lines">Crews that <em class="serif">count</em> on us.</h2>
+      </div>
+      <div class="voices__cols" id="voicesCols">
+        <div class="voices__col" data-dir="-1">
+          <blockquote class="quote"><p>"Their trucks were sequenced so well our paver never stopped. First time in years."</p><footer><b>Site Superintendent</b><span>Paving contractor, Chautauqua County</span></footer></blockquote>
+          <blockquote class="quote quote--amber"><p>"Tickets in my inbox before the last truck left. That's the level of documentation we need."</p><footer><b>Project Manager</b><span>General contractor, Erie PA</span></footer></blockquote>
+          <blockquote class="quote"><p>"They hauled 4,000 tons of crusher run in a week and never missed a window."</p><footer><b>Owner</b><span>Excavation company, Jamestown NY</span></footer></blockquote>
+          <blockquote class="quote quote--dark"><p>"Reliable in January. That says everything."</p><footer><b>Highway Superintendent</b><span>Town DPW</span></footer></blockquote>
+        </div>
+        <div class="voices__col" data-dir="1">
+          <blockquote class="quote quote--dark"><p>"Precast barriers arrived staged in the exact order our crane needed them."</p><footer><b>Foreman</b><span>Bridge contractor</span></footer></blockquote>
+          <blockquote class="quote"><p>"Clean topsoil, screened like they promised, spread-ready. Homeowners noticed."</p><footer><b>Landscape Contractor</b><span>Lakewood NY</span></footer></blockquote>
+          <blockquote class="quote quote--amber"><p>"Dispatch picks up on the first ring. Every time."</p><footer><b>Estimator</b><span>Concrete contractor</span></footer></blockquote>
+          <blockquote class="quote"><p>"Debris off-site in a day, with disposal receipts. That closed our permit."</p><footer><b>Developer</b><span>Mixed-use project, Buffalo NY</span></footer></blockquote>
+        </div>
+        <div class="voices__col" data-dir="-1">
+          <blockquote class="quote quote--amber"><p>"Hot-mix arrived at temp. We didn't lose a single load to the weather."</p><footer><b>Paving Foreman</b><span>Municipal road program</span></footer></blockquote>
+          <blockquote class="quote"><p>"Their drivers know our sites better than some of our own subs."</p><footer><b>Site Manager</b><span>Warehouse build, Dunkirk NY</span></footer></blockquote>
+          <blockquote class="quote quote--dark"><p>"We've moved all our aggregate hauling to Northland. Simple decision."</p><footer><b>Operations Director</b><span>Regional GC</span></footer></blockquote>
+          <blockquote class="quote"><p>"Fair pricing, no surprises on the invoice."</p><footer><b>Owner-Builder</b><span>Residential, Fredonia NY</span></footer></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact__grid">
+          <div class="contact__info">
+            <span class="eyebrow reveal">Get a quote</span>
+            <h2 class="h2 split-lines">Tell us what needs <em class="serif">moving</em>.</h2>
+            <p class="reveal">Send the material, tonnage and site. Dispatch replies within the hour during working days — faster if you call.</p>
+
+            <div class="contact__cards">
+              <a href="tel:7179909390" class="ccard magnetic reveal" data-cursor="-sm">
+                <span class="eyebrow">Call dispatch</span>
+                <b>717-990-9390</b>
+                <span class="ccard__hint">24/7 for active contracts</span>
+              </a>
+              <div class="ccard reveal">
+                <span class="eyebrow">Office</span>
+                <b>25 Woodland Ave, Suite 15</b>
+                <span class="ccard__hint">Jamestown, NY 14701</span>
+              </div>
+              <div class="ccard reveal">
+                <span class="eyebrow">Hours</span>
+                <b>Mon – Sat · 5:00 AM – 7:00 PM</b>
+                <span class="ccard__hint">Sunday by arrangement</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="form" id="quoteForm" novalidate>
+            <div class="form__row">
+              <label class="field">
+                <span>Name</span>
+                <input type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
+              </label>
+              <label class="field">
+                <span>Company</span>
+                <input type="text" name="company" autocomplete="organization" placeholder="Acme Construction" />
+              </label>
+            </div>
+            <div class="form__row">
+              <label class="field">
+                <span>Email</span>
+                <input type="email" name="email" required autocomplete="email" placeholder="jane@company.com" />
+              </label>
+              <label class="field">
+                <span>Phone</span>
+                <input type="tel" name="phone" autocomplete="tel" placeholder="(716) 555-0100" />
+              </label>
+            </div>
+            <div class="form__row">
+              <label class="field">
+                <span>Material</span>
+                <select name="material" required>
+                  <option value="" disabled selected>Select material</option>
+                  <option>Ready-Mix Concrete</option>
+                  <option>Precast Components</option>
+                  <option>Hot Mix Asphalt</option>
+                  <option>Cold Patch / Millings</option>
+                  <option>Sand</option>
+                  <option>Gravel</option>
+                  <option>Crushed Stone</option>
+                  <option>Fill Dirt</option>
+                  <option>Topsoil</option>
+                  <option>Construction Debris</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Estimated tonnage</span>
+                <input type="text" name="tonnage" placeholder="e.g. 400 tons" />
+              </label>
+            </div>
+            <label class="field">
+              <span>Site address &amp; delivery window</span>
+              <textarea name="details" rows="4" placeholder="Site location, access notes, start date and window…"></textarea>
+            </label>
+            <div class="form__foot">
+              <p class="form__note mono">By submitting you agree to be contacted about your request.</p>
+              <button type="submit" class="btn btn--amber btn--lg magnetic" data-cursor="-sm"><span>Send Request</span><i></i></button>
+            </div>
+            <div class="form__success" id="formSuccess">
+              <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 25l7 7 13-14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <h3>Request received.</h3>
+              <p>Dispatch will reach out shortly. For urgent loads call <a href="tel:7179909390">717-990-9390</a>.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="nav__mark nav__mark--lg">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 78 L18 46 L52 46 L52 30 L78 30 L92 46 L102 46 L102 78 Z" fill="currentColor"/>
+              <circle cx="34" cy="84" r="9" fill="currentColor"/>
+              <circle cx="86" cy="84" r="9" fill="currentColor"/>
+            </svg>
+          </span>
+          <p>Professional construction materials hauling for commercial, municipal and residential projects. Other Specialty Trade Contractors.</p>
+        </div>
+        <div class="footer__col">
+          <span class="eyebrow">Navigate</span>
+          <a href="#services">Services</a><a href="#materials">Materials</a><a href="#fleet">Fleet</a><a href="#process">Process</a><a href="#sectors">Sectors</a><a href="#contact">Contact</a>
+        </div>
+        <div class="footer__col">
+          <span class="eyebrow">Materials</span>
+          <a href="#materials">Concrete</a><a href="#materials">Asphalt</a><a href="#materials">Sand &amp; Gravel</a><a href="#materials">Crushed Stone</a><a href="#materials">Fill &amp; Topsoil</a><a href="#materials">Debris</a>
+        </div>
+        <div class="footer__col">
+          <span class="eyebrow">Contact</span>
+          <a href="tel:7179909390">717-990-9390</a>
+          <address>25 Woodland Ave, Suite 15<br/>Jamestown, NY 14701</address>
+        </div>
+      </div>
+      <div class="footer__big" aria-hidden="true">
+        <span>Northland</span>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> Northland Carrier Service Inc. All rights reserved.</span>
+        <span class="mono">DOT compliant · Fully insured · Jamestown, NY</span>
+        <a href="#top" class="footer__up" data-cursor="-sm">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
