@@ -219,13 +219,70 @@ function sectors() {
 
 /* ───────────── Voices: vertical columns slider ───────────── */
 function voices() {
-  const cols = document.querySelectorAll(".voices__col");
-  cols.forEach((col) => {
-    const dir = parseFloat(col.dataset.dir || "-1");
-    gsap.fromTo(col, { yPercent: dir < 0 ? 0 : -32 }, {
-      yPercent: dir < 0 ? -32 : 0, ease: "none",
-      scrollTrigger: { trigger: ".voices__cols", start: "top bottom", end: "bottom top", scrub: 0.8 }
+  const wrap = document.querySelector(".voices__cols");
+  if (!wrap) return;
+  const cols = [...wrap.querySelectorAll(".voices__col")];
+  const tweens = [];
+
+  cols.forEach((col, i) => {
+    // Duplicate the cards once so the loop is seamless
+    col.insertAdjacentHTML("beforeend", col.innerHTML);
+    col.querySelectorAll(".quote").forEach((q, n) => n >= col.children.length / 2 && q.setAttribute("aria-hidden", "true"));
+    col.dataset.speed = String(26 + i * 7); // px per second — each column drifts at its own pace
+  });
+
+  const build = () => {
+    tweens.forEach((t) => t && t.kill());
+    tweens.length = 0;
+    cols.forEach((col, i) => {
+      const dir = parseFloat(col.dataset.dir || "-1");
+      const half = col.scrollHeight / 2;
+      const speed = parseFloat(col.dataset.speed);
+      // Drive `y` continuously and wrap it inside [-half, 0] so the column never runs out
+      const t = gsap.to(col, {
+        y: dir < 0 ? `-=${half}` : `+=${half}`,
+        duration: half / speed,
+        ease: "none",
+        repeat: -1,
+        modifiers: { y: gsap.utils.unitize((y) => gsap.utils.wrap(-half, 0, parseFloat(y))) }
+      });
+      t.progress((i * 0.37) % 1); // de-sync the columns
+      t._hover = false;
+      tweens.push(t);
     });
+  };
+  gsap.set(cols, { y: 0 });
+  build();
+
+  // Only run while the section is on screen; nudge the speed with scroll velocity
+  ScrollTrigger.create({
+    trigger: wrap,
+    start: "top bottom",
+    end: "bottom top",
+    onToggle: (self) => tweens.forEach((t) => (self.isActive ? t.play() : t.pause())),
+    onUpdate: (self) => {
+      const boost = Math.min(Math.abs(self.getVelocity()) / 700, 3);
+      if (boost < 0.15) return;
+      tweens.forEach((t) => {
+        if (t._hover) return;
+        gsap.to(t, { timeScale: 1 + boost, duration: 0.25, overwrite: true, onComplete: () => gsap.to(t, { timeScale: 1, duration: 1.4, ease: "power2.out" }) });
+      });
+    }
+  });
+
+  // Ease to a crawl while a column is hovered so quotes can be read
+  if (!isTouch) {
+    cols.forEach((col, i) => {
+      col.addEventListener("mouseenter", () => { tweens[i]._hover = true; gsap.to(tweens[i], { timeScale: 0.12, duration: 0.7, overwrite: true }); });
+      col.addEventListener("mouseleave", () => { tweens[i]._hover = false; gsap.to(tweens[i], { timeScale: 1, duration: 0.9, overwrite: true }); });
+    });
+  }
+
+  // Rebuild on resize (card heights change with the viewport)
+  let raf;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => { gsap.set(cols, { y: 0 }); build(); });
   });
 }
 
